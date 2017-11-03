@@ -9,8 +9,8 @@ These instructions will get you a copy of the project up and running on your loc
 ### Umbrella Dashboard:
 1. Settings 
 2. Integrations 
-3. "+" 
-4. '''<insert name>'''
+3. " + " 
+4. " < insert name > "
 5. create 
 6. click on integration 
 7. enable 
