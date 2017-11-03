@@ -1,58 +1,57 @@
+#import necessary libraries and functions
 import simplejson as json
 import requests
 from config import Config
 import time
 import sys
 import urllib2
+from AddBlockerFunctions import progressbar 
 
-def progressbar(it, prefix = "", size = 60):
-    count = len(it)
-    def _show(_i):
-        x = int(size*_i/count)
-        sys.stdout.write("%s[%s%s] %i/%i\r" % (prefix, "#"*x, "."*(size-x), _i, count))
-        sys.stdout.flush()
-    
-    _show(0)
-    for i, item in enumerate(it):
-        yield item
-        _show(i+1)
-    sys.stdout.write("\n")
-    sys.stdout.flush()
+#create global variables 
+# two sets to hold domains, one with domains already in Umbrella, the other with domains from Ads DB
+l_umbrella =[] 
+l_ads  =[]
 
-l_odns =[] 
-l_add  =[]
+# import file with API call URL's and customer key
 f = file('AddBlocker.cfg')
 cfg = Config(f)
-# Create a list of all urls in Opendns integration
+
+# Create a set of all domains in Umbrella integration
 Url = cfg.domainurl+'?customerKey='+cfg.custkey
 while True:
     r = requests.get(Url)
-##    JsonFile = r.json()
     JsonFile = r.json()
     for row in JsonFile["data"]:
-        test = row["name"]
-        l_odns.append(row["name"])
-    if bool(JsonFile["meta"]["next"]) :
+        l_umbrella.append(row["name"])
+    if bool(JsonFile["meta"]["next"]):
         Url = JsonFile["meta"]["next"]
     else:    
         break
-#create list of Addblock URLS
+
+#create list of Addblock domains from Ads DB
 Url = cfg.addurl
 r = requests.get(Url)
-for line in r.iter_lines() :
-    if (line[0:1] is '0') :
-        l_add.append(line[8:])
-l_add_js = frozenset(json.loads(json.dumps(l_add)))
-l_odns_js = frozenset(json.loads(json.dumps(l_odns)))
-dom_remove = l_odns_js - l_add_js
-dom_add = l_add_js - l_odns_js
+for line in r.iter_lines():
+    if (line[0:1] is '0'):
+        l_ads.append(line[8:])
 
+# creat two frozensets to hold domains 
+l_ads_js = frozenset(json.loads(json.dumps(l_ads)))
+l_umbrella_js = frozenset(json.loads(json.dumps(l_umbrella)))
 
-for line in progressbar(dom_remove,"removing: ", 50):
-    Url = cfg.domainurl+'?customerKey='+cfg.custkey+'&where[name]='+line
-    r = requests.delete(Url) 
-    print(line)
+# compare the two lists and create two new lists, one for domains to be removed, and one for domains to be added to Umbrella 
+dom_remove = l_umbrella_js - l_ads_js
+dom_add = l_ads_js - l_umbrella_js
 
+# check if dom_remove is not empty    
+if dom_remove:
+    # deleting URL's that are in Umbrella, which are not in de Ads DB anymore 
+    for line in progressbar(dom_remove,"removing: ", 50):
+        Url = cfg.domainurl+'?customerKey='+cfg.custkey+'&where[name]='+line
+        r = requests.delete(Url) 
+        print(line)
+
+# COMMENT
 Header = {'Content-type': 'application/json', 'Accept': 'application/json'}
 Url = cfg.eventurl+'?customerKey='+cfg.custkey
 
@@ -69,7 +68,10 @@ for line in progressbar(dom_add,"Adding:   ",50):
     "providerName": "Security Platform"
     }
     # Ruzie  met requests voor de post.. Even oldscool
-  
+    
+    #req = requests.post(Url, data = json.dumps(data), {'Content-type': 'application/json', 'Accept': 'application/json'})
+
+
     req = urllib2.Request(Url, json.dumps(data), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
    ## print i," uit ",len(dom_add), line,"\r"
     try:
@@ -77,6 +79,6 @@ for line in progressbar(dom_add,"Adding:   ",50):
 ##  `  except (RuntimeError, TypeError, NameError):
     except: 
         for i in progressbar(range(10),"failing    "+line,50):
-	   time.sleep(1)
-	pass 
+       time.sleep(1)
+    pass 
     i+= 1 
