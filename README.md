@@ -8,25 +8,25 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Umbrella Dashboard:
 1. Settings 
-3. Integrations 
-5. + 
-6. <insert name> 
-8. create 
-9. click on integration 
-10. enable 
-11. copy paste key (behind “https://s-platform.api.opendns.com/1.0/events?customerKey=“) 
-12. hit save
-13. Policies
-14. Create new policy
-15. Click next
-16. Click drop down menu for security settings
-17. Add new setting
-18. Give name and click create
-19. Check boxes Malware, Newly Seen Domains, Command and Control,  Phishing, Potentially Harmful + the new integration AddBlocker
-20. Click next
-21. Set content filtering to custom and click next
-22. Click next for apply destination list
-23. Edit the block page so that you know when the AddBlocker policy has been enforced.
+2. Integrations 
+3. "+"" 
+4. <insert name> 
+5. create 
+6. click on integration 
+7. enable 
+8. copy paste key (behind “https://s-platform.api.opendns.com/1.0/events?customerKey=“) 
+9. hit save
+10. Policies
+11. Create new policy
+12. Click next
+13. Click drop down menu for security settings
+14. Add new setting
+15. Give name and click create
+16. Check boxes Malware, Newly Seen Domains, Command and Control,  Phishing, Potentially Harmful + the new integration AddBlocker
+17. Click next
+18. Set content filtering to custom and click next
+19. Click next for apply destination list
+20. Edit the block page so that you know when the AddBlocker policy has been enforced.
 
 ### Github:
 1. Download zip file from Github
@@ -40,10 +40,10 @@ Some libraries are needed to be installed, in order for the code to work. Please
 1. Change directory to folder “addblocker-master” (cd <path to folder>)
 2. Execute python file (python Addblocker.py)
 3. If necessary install necessary libraries:
-* sudo pip install --upgrade pip
-* sudo pip install simplejson
-* sudo pip install config
-* sudo pip install <other libraries>
+	* sudo pip install --upgrade pip
+	* sudo pip install simplejson
+	* sudo pip install config
+	* sudo pip install <other libraries>
 ```
 
 ## Built With
