@@ -1,5 +1,6 @@
 import sys
 
+# function for progress bar (source in readme file)
 def progressbar(it, prefix = "", size = 60):
     count = len(it)
     def _show(_i):

@@ -58,6 +58,7 @@ Url = cfg.eventurl+'?customerKey='+cfg.custkey
 # create post request data according to Umbrella API docummentation
 i = 1
 for line in progressbar(dom_add,"Adding:   ",50):
+    # Although this information MUST be provided when using the API, not all of it is utilized in the destination lists within Umbrella
     data = {
     "alertTime": "2013-02-08T11:14:26.0Z",
     "deviceId": "ba6a59f4-e692-4724-ba36-c28132c761de",
@@ -76,6 +77,7 @@ for line in progressbar(dom_add,"Adding:   ",50):
     #OLD req = urllib2.Request(Url, json.dumps(data), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
     #OLD print i," uit ",len(dom_add), line,"\r"
     
+    # error handling 
     try:
         # if true then the request was HTTP 200
         req.status_code == requests.codes.ok
@@ -85,7 +87,7 @@ for line in progressbar(dom_add,"Adding:   ",50):
     
     # if request fails then sleep
     except: 
-        for i in progressbar(range(10),"failing    "+line,50):
+        for i in progressbar(range(10),"failed to add: "+line,50):
             time.sleep(1)
     pass 
     i+= 1 

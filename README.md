@@ -52,7 +52,8 @@ Some libraries are needed to be installed, in order for the code to work. Please
 * [Source Ad URL’s](https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts)
 * [Original Source AdBlocker](https://github.com/bartjanm/addblocker)
 * [Umbrella Dashboard](https://dashboard.umbrella.com)
-* [Frozen set](https://www.python-course.eu/sets_frozensets.php)
+* [Frozen Set](https://www.python-course.eu/sets_frozensets.php)
+* [Umrella API Documentation](https://docs.umbrella.com/developer/enforcement-api/)
 
 ## Authors
 
