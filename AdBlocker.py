@@ -4,7 +4,7 @@ import requests
 from config import Config
 import time
 import sys
-from AddBlockerFunctions import progressbar 
+from AdBlockerFunctions import progressbar 
 #OLD import urllib2
 
 #create global variables 
@@ -13,7 +13,7 @@ l_umbrella =[]
 l_ads  =[]
 
 # import file with API call URL's and customer key
-f = file('AddBlocker.cfg')
+f = file('AdBlocker.cfg')
 cfg = Config(f)
 
 # Create a set of all domains in Umbrella integration
@@ -28,7 +28,7 @@ while True:
     else:    
         break
 
-#create list of Addblock domains from Ads DB
+#create list of AdBlock domains from Ads DB
 Url = cfg.addurl
 r = requests.get(Url)
 for line in r.iter_lines():
