@@ -12,7 +12,7 @@ from AdBlockerFunctions import progressbar
 l_umbrella =[] 
 l_ads  =[]
 
-# import file with API call URL's and customer key
+# import file with API call URL's and customer key (file is in .gitignore)
 f = file('AdBlocker.cfg')
 cfg = Config(f)
 
