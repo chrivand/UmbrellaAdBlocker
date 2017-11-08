@@ -2,11 +2,12 @@ import simplejson as json
 import requests
 from config import Config
 
+# testing function
 l_odns =[] 
 l_ads  =[]
 f = file('AdBlocker.cfg')
 cfg = Config(f)
-# Create a list of all urls in Opendns integration
+# Create a list of all urls in Umbrella integration
 Url = cfg.domainurl+'?customerKey='+cfg.custkey
 while True:
     r = requests.get(Url)
@@ -19,7 +20,8 @@ while True:
         Url = JsonFile["meta"]["next"]
     else:    
         break
-#create list of Addblock URLS
+
+#create list of AdBlock URLS
 Url = cfg.addurl
 r = requests.get(Url)
 for line in r.iter_lines() :
