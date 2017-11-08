@@ -11,11 +11,11 @@ These instructions will get you a copy of the project up and running on your loc
 2. Integrations 
 3. " + " 
 4. " < insert name > "
-5. create 
-6. click on integration 
-7. enable 
-8. copy paste key (behind “https://s-platform.api.opendns.com/1.0/events?customerKey=“) 
-9. hit save
+5. Create 
+6. Click on integration 
+7. Enable 
+8. Copy paste key (behind “https://s-platform.api.opendns.com/1.0/events?customerKey=“) 
+9. Hit save
 10. Policies
 11. Create new policy
 12. Click next
@@ -26,7 +26,7 @@ These instructions will get you a copy of the project up and running on your loc
 17. Click next
 18. Set content filtering to custom and click next
 19. Click next for apply destination list
-20. Edit the block page so that you know when the AddBlocker policy has been enforced.
+20. Edit the block page so that you know when the AdBlocker policy has been enforced.
 
 ### Github:
 1. Download zip file from Github
@@ -50,7 +50,7 @@ Some libraries are needed to be installed, in order for the code to work. Please
 
 * [Source Progress bar](https://gist.github.com/kennethreitz/450592)
 * [Source Ad URL’s](https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts)
-* [Original Source AddBlocker](https://github.com/bartjanm/addblocker)
+* [Original Source AdBlocker](https://github.com/bartjanm/addblocker)
 * [Umbrella Dashboard](https://dashboard.umbrella.com)
 * [Frozen set](https://www.python-course.eu/sets_frozensets.php)
 
