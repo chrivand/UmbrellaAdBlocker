@@ -51,10 +51,11 @@ if dom_remove:
         r = requests.delete(Url) 
         print(line)
 
-# COMMENT
+# create header for post request to add new Ad Domains to Umbrella
 Header = {'Content-type': 'application/json', 'Accept': 'application/json'}
 Url = cfg.eventurl+'?customerKey='+cfg.custkey
 
+# create post request data according to Umbrella API docummentation
 i = 1
 for line in progressbar(dom_add,"Adding:   ",50):
     data = {
@@ -67,18 +68,24 @@ for line in progressbar(dom_add,"Adding:   ",50):
     "protocolVersion": "1.0a",
     "providerName": "Security Platform"
     }
-    # Ruzie  met requests voor de post.. Even oldscool
     
-    #req = requests.post(Url, data = json.dumps(data), {'Content-type': 'application/json', 'Accept': 'application/json'})
+    # post request ensembly
+    req = requests.post(Url, data=json.dumps(data), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
 
 
-    req = urllib2.Request(Url, json.dumps(data), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
-   ## print i," uit ",len(dom_add), line,"\r"
+    #OLD req = urllib2.Request(Url, json.dumps(data), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
+    #OLD print i," uit ",len(dom_add), line,"\r"
+    
     try:
-        response = urllib2.urlopen(req)
-##  `  except (RuntimeError, TypeError, NameError):
+        # if true then the request was HTTP 200
+        req.status_code == requests.codes.ok
+        
+        #OLD response = urllib2.urlopen(req)
+    #OLD except (RuntimeError, TypeError, NameError):
+    
+    # if request fails then sleep
     except: 
         for i in progressbar(range(10),"failing    "+line,50):
-       time.sleep(1)
+            time.sleep(1)
     pass 
     i+= 1 
