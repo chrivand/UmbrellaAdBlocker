@@ -1,6 +1,6 @@
-# Ad Blocker on Umbrella
+# AdBlocker on Umbrella
 
-This is a Ad Blocker built on Cisco Umbrella.
+This is an Ad Blocker built on Cisco Umbrella.
 
 ## Getting Started with the Installation
 
@@ -30,15 +30,15 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Github:
 1. Download zip file from Github
-2. Add key to AddBlocker.cfg
+2. Add key to AdBlocker.cfg
 
 ### Terminal
 
 Some libraries are needed to be installed, in order for the code to work. Please use the below method to do so on your terminal:
 
 ```
-1. Change directory to folder “addblocker-master” (cd <path to folder>)
-2. Execute python file (python Addblocker.py)
+1. Change directory to folder “adblocker” (cd <path to folder>)
+2. Execute python file (python Adblocker.py)
 3. If necessary install necessary libraries:
 	* sudo pip install --upgrade pip
 	* sudo pip install simplejson

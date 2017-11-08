@@ -4,8 +4,8 @@ import requests
 from config import Config
 import time
 import sys
-import urllib2
 from AddBlockerFunctions import progressbar 
+#OLD import urllib2
 
 #create global variables 
 # two sets to hold domains, one with domains already in Umbrella, the other with domains from Ads DB
