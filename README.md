@@ -1,6 +1,6 @@
 # AdBlocker on Umbrella
 
-This is an Ad Blocker built on Cisco Umbrella.
+This is an AdBlocker built on Cisco Umbrella.
 
 ## Getting Started with the Installation
 
