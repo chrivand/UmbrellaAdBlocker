@@ -5,9 +5,8 @@ from config import Config
 import time
 import sys
 from AdBlockerFunctions import progressbar 
-#OLD import urllib2
+from datetime import datetime
 
-#create global variables 
 # two sets to hold domains, one with domains already in Umbrella, the other with domains from Ads DB
 l_umbrella =[] 
 l_ads  =[]
@@ -16,7 +15,7 @@ l_ads  =[]
 f = file('AdBlocker.cfg')
 cfg = Config(f)
 
-# Create a set of all domains in Umbrella integration
+# append the set for all domains in Umbrella integration by doing GET requests
 Url = cfg.domainurl+'?customerKey='+cfg.custkey
 while True:
     r = requests.get(Url)
@@ -28,9 +27,10 @@ while True:
     else:    
         break
 
-#create list of AdBlock domains from Ads DB
+# append the set for AdBlock domains from Ads DB by doing GET request
 Url = cfg.addurl
 r = requests.get(Url)
+# NOTE: change this for-loop for the DevNet session
 for line in r.iter_lines():
     # lines in Ads DB with domains, start with 0.0.0.0 ...
     if (line[0:1] is '0'):
@@ -41,7 +41,7 @@ for line in r.iter_lines():
 l_ads_js = frozenset(json.loads(json.dumps(l_ads)))
 l_umbrella_js = frozenset(json.loads(json.dumps(l_umbrella)))
 
-# compare the two lists and create two new lists, one for domains to be removed, and one for domains to be added to Umbrella 
+# compare the two frozensets and create two new lists, one for domains to be removed, and one for domains to be added to Umbrella 
 dom_remove = l_umbrella_js - l_ads_js
 dom_add = l_ads_js - l_umbrella_js
 
@@ -57,36 +57,33 @@ if dom_remove:
 Header = {'Content-type': 'application/json', 'Accept': 'application/json'}
 Url = cfg.eventurl+'?customerKey='+cfg.custkey
 
-# create post request data according to Umbrella API docummentation
+# iterate variable used in comming for loop
 i = 1
+# time for AlertTime and EventTime when domains are added to Umbrella
+time = datetime.now().isoformat()
+
+# loop through domains that need to be added and create Event that can be sent with POST request (according to Umbrella API docummentation)
 for line in progressbar(dom_add,"Adding:   ",50):
     # Although this information MUST be provided when using the API, not all of it is utilized in the destination lists within Umbrella
     data = {
-    "alertTime": "2013-02-08T11:14:26.0Z",
+    "alertTime": time + "Z",
     "deviceId": "ba6a59f4-e692-4724-ba36-c28132c761de",
     "deviceVersion": "13.7a",
     "dstDomain": line,
     "dstUrl": "http://" + line + "/",
-    "eventTime": "2013-02-08T09:30:26.0Z",
+    "eventTime": time + "Z",
     "protocolVersion": "1.0a",
     "providerName": "Security Platform"
     }
     
     # post request ensembly
     req = requests.post(Url, data=json.dumps(data), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
-
-
-    #OLD req = urllib2.Request(Url, json.dumps(data), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
-    #OLD print i," uit ",len(dom_add), line,"\r"
     
     # error handling 
     try:
         # if true then the request was HTTP 200, so successful 
         req.status_code == requests.codes.ok
         
-        #OLD response = urllib2.urlopen(req)
-    #OLD except (RuntimeError, TypeError, NameError):
-    
     # if request fails then sleep
     except: 
         for i in progressbar(range(10),"failed to add: "+line,50):
