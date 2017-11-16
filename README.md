@@ -4,7 +4,7 @@ This is an AdBlocker built on Cisco Umbrella.
 
 ## Getting Started with the Installation
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Please follow the below steps.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Please follow the below steps. There is an extensive lab guide written for DevNet learling labs. Please send a message for more information.
 
 ### Umbrella Dashboard:
 1. Settings 
@@ -62,7 +62,7 @@ Some libraries are needed to be installed, in order for the code to work. Please
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed - see the [LICENSE](LICENSE) file for details
 
 
 
