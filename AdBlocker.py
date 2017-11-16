@@ -32,7 +32,9 @@ while True:
 Url = cfg.addurl
 r = requests.get(Url)
 for line in r.iter_lines():
+    # lines in Ads DB with domains, start with 0.0.0.0 ...
     if (line[0:1] is '0'):
+        # they 9th character is the first of the domain, e.g.: 0.0.0.0 tracking.klickthru.com
         l_ads.append(line[8:])
 
 # creat two frozensets to hold domains 
@@ -79,7 +81,7 @@ for line in progressbar(dom_add,"Adding:   ",50):
     
     # error handling 
     try:
-        # if true then the request was HTTP 200
+        # if true then the request was HTTP 200, so successful 
         req.status_code == requests.codes.ok
         
         #OLD response = urllib2.urlopen(req)
