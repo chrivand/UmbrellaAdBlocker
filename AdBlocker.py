@@ -47,11 +47,19 @@ dom_add = l_ads_js - l_umbrella_js
 
 # check if dom_remove is not empty    
 if dom_remove:
+    # give feedback to user
+    sys.stdout.write("\n")
+    sys.stdout.write("Unnecessary domains will be removed now...")
+    sys.stdout.write("\n")
     # deleting URL's that are in Umbrella, which are not in de Ads DB anymore 
     for line in progressbar(dom_remove,"removing: ", 50):
         Url = cfg.domainurl+'?customerKey='+cfg.custkey+'&where[name]='+line
         r = requests.delete(Url) 
         print(line)
+    # give feedback to user
+    sys.stdout.write("\n")
+    sys.stdout.write("Unnecessary domains have been removed!")
+    sys.stdout.write("\n")
 
 # create header for post request to add new Ad Domains to Umbrella
 Header = {'Content-type': 'application/json', 'Accept': 'application/json'}
@@ -62,31 +70,42 @@ i = 1
 # time for AlertTime and EventTime when domains are added to Umbrella
 time = datetime.now().isoformat()
 
-# loop through domains that need to be added and create Event that can be sent with POST request (according to Umbrella API docummentation)
-for line in progressbar(dom_add,"Adding:   ",50):
-    # Although this information MUST be provided when using the API, not all of it is utilized in the destination lists within Umbrella
-    data = {
-    "alertTime": time + "Z",
-    "deviceId": "ba6a59f4-e692-4724-ba36-c28132c761de",
-    "deviceVersion": "13.7a",
-    "dstDomain": line,
-    "dstUrl": "http://" + line + "/",
-    "eventTime": time + "Z",
-    "protocolVersion": "1.0a",
-    "providerName": "Security Platform"
-    }
-    
-    # post request ensembly
-    req = requests.post(Url, data=json.dumps(data), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
-    
-    # error handling 
-    try:
-        # if true then the request was HTTP 200, so successful 
-        req.status_code == requests.codes.ok
+# check if dom_add is not empty    
+if dom_add:
+    # give feedback to user
+    sys.stdout.write("New domains will be added now...")
+    sys.stdout.write("\n")
+    # loop through domains that need to be added and create Event that can be sent with POST request (according to Umbrella API docummentation)
+    for line in progressbar(dom_add,"Adding:   ",50):
+        # Although this information MUST be provided when using the API, not all of it is utilized in the destination lists within Umbrella
+        data = {
+        "alertTime": time + "Z",
+        "deviceId": "ba6a59f4-e692-4724-ba36-c28132c761de",
+        "deviceVersion": "13.7a",
+        "dstDomain": line,
+        "dstUrl": "http://" + line + "/",
+        "eventTime": time + "Z",
+        "protocolVersion": "1.0a",
+        "providerName": "Security Platform"
+        }
         
-    # if request fails then sleep
-    except: 
-        for i in progressbar(range(10),"failed to add: "+line,50):
-            time.sleep(1)
-    pass 
+        # post request ensembly
+        req = requests.post(Url, data=json.dumps(data), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
+        
+        # error handling 
+        try:
+            # if true then the request was HTTP 200, so successful 
+            req.status_code == requests.codes.ok
+            
+        # if request fails then sleep
+        except: 
+            for i in progressbar(range(10),"failed to add: "+line,50):
+                time.sleep(1)
+        pass 
     i+= 1 
+
+# give feedback to user
+sys.stdout.write("\n")  
+sys.stdout.write("Congratulations, the AdBlocker has been updated!")
+
+# end of script
