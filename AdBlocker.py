@@ -47,9 +47,9 @@ dom_add = l_ads_js - l_umbrella_js
 
 # check if dom_remove is not empty    
 if dom_remove:
-    # give feedback to user
+    # give feedback to user and add line break for more overview
     sys.stdout.write("\n")
-    sys.stdout.write("Unnecessary domains will be removed now...")
+    sys.stdout.write("Unnecessary domains will be removed now:\n")
     sys.stdout.write("\n")
     # deleting URL's that are in Umbrella, which are not in de Ads DB anymore 
     for line in progressbar(dom_remove,"removing: ", 50):
@@ -58,8 +58,7 @@ if dom_remove:
         print(line)
     # give feedback to user
     sys.stdout.write("\n")
-    sys.stdout.write("Unnecessary domains have been removed!")
-    sys.stdout.write("\n")
+    sys.stdout.write("Unnecessary domains have been removed!\n")
 
 # create header for post request to add new Ad Domains to Umbrella
 Header = {'Content-type': 'application/json', 'Accept': 'application/json'}
@@ -72,8 +71,9 @@ time = datetime.now().isoformat()
 
 # check if dom_add is not empty    
 if dom_add:
-    # give feedback to user
-    sys.stdout.write("New domains will be added now...")
+    # give feedback to user and add line break for more overview
+    sys.stdout.write("\n")
+    sys.stdout.write("New domains will be added now:\n")
     sys.stdout.write("\n")
     # loop through domains that need to be added and create Event that can be sent with POST request (according to Umbrella API docummentation)
     for line in progressbar(dom_add,"Adding:   ",50):
@@ -104,8 +104,8 @@ if dom_add:
         pass 
     i+= 1 
 
-# give feedback to user
+# give feedback to user and add line break for more overview
 sys.stdout.write("\n")  
-sys.stdout.write("Congratulations, the AdBlocker has been updated!")
+sys.stdout.write("Congratulations, the AdBlocker has been updated!\n")
 
 # end of script
