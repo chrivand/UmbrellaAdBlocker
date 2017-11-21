@@ -102,7 +102,7 @@ if dom_add:
             for i in progressbar(range(10),"failed to add: "+line,50):
                 time.sleep(1)
         pass 
-    i+= 1 
+        i+= 1 
 
 # give feedback to user and add line break for more overview
 sys.stdout.write("\n")  
