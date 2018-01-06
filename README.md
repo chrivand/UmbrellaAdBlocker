@@ -22,7 +22,7 @@ These instructions will get you a copy of the project up and running on your loc
 13. Click drop down menu for security settings
 14. Add new setting
 15. Give name and click create
-16. Check boxes Malware, Newly Seen Domains, Command and Control,  Phishing, Potentially Harmful + the new integration AddBlocker
+16. Check boxes Malware, Newly Seen Domains, Command and Control,  Phishing, Potentially Harmful + the new integration AdBlocker
 17. Click next
 18. Set content filtering to custom and click next
 19. Click next for apply destination list
@@ -40,10 +40,10 @@ Some libraries are needed to be installed, in order for the code to work. Please
 1. Change directory to folder “adblocker” (cd <path to folder>)
 2. Execute python file (python Adblocker.py)
 3. If necessary install necessary libraries:
-	* sudo pip install --upgrade pip
-	* sudo pip install simplejson
-	* sudo pip install config
-	* sudo pip install <other libraries>
+	$ sudo pip install --upgrade pip
+	$ sudo pip install simplejson
+	$ sudo pip install config
+	$ sudo pip install <other libraries>
 ```
 
 ## Built With
