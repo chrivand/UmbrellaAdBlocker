@@ -31,7 +31,7 @@ while True:
 Url = cfg.addurl
 r = requests.get(Url)
 
-# NOTE: this is the for-loop needed for the DevNet session (comment lines if full production version)
+# NOTE: this is the for-loop needed for the DevNet session (comment lines for full production version)
 # index is used to stop iteration after 250 domains
 for index, line in enumerate(r.iter_lines()):
     if (index == 279):
