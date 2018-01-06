@@ -15,7 +15,7 @@ l_ads  =[]
 f = file('AdBlocker.cfg')
 cfg = Config(f)
 
-# append the set for all domains in Umbrella integration by doing GET requests
+# append the set with all domains that are already present in the Umbrella integration by doing GET requests 
 Url = cfg.domainurl+'?customerKey='+cfg.custkey
 while True:
     r = requests.get(Url)
@@ -30,12 +30,21 @@ while True:
 # append the set for AdBlock domains from Ads DB by doing GET request
 Url = cfg.addurl
 r = requests.get(Url)
-# NOTE: change this for-loop for the DevNet session
-for line in r.iter_lines():
-    # lines in Ads DB with domains, start with 0.0.0.0 ...
-    if (line[0:1] is '0'):
-        # they 9th character is the first of the domain, e.g.: 0.0.0.0 tracking.klickthru.com
+
+# NOTE: this is the for-loop needed for the DevNet session (comment lines if full production version)
+# index is used to stop iteration after 250 domains
+for index, line in enumerate(r.iter_lines()):
+    if (index == 279):
+        break
+    elif (line[0:1] is '0'):
         l_ads.append(line[8:])
+
+# NOTE: this is the for-loop needed for the full production version (comment lines for DevNet session)
+#for line in r.iter_lines():
+    # lines in Ads DB with domains, start with 0.0.0.0 ...
+    #if (line[0:1] is '0'):
+        # they 9th character is the first of the domain, e.g.: 0.0.0.0 tracking.klickthru.com
+        #l_ads.append(line[8:])
 
 # creat two frozensets to hold domains 
 l_ads_js = frozenset(json.loads(json.dumps(l_ads)))
