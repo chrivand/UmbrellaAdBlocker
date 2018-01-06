@@ -4,7 +4,7 @@ This is an Ad Blocker built on Cisco Umbrella.
 
 ## Getting Started with the Installation
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Please follow the below steps. There is an extensive lab guide written for DevNet learling labs. Please send a message for more information.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Please follow the below steps. There is an extensive lab guide written for DevNet learling labs. Please send a message for more information, or check out the [Cisco DevNet](https://developer.cisco.com) website.
 
 ### Umbrella Dashboard:
 1. Settings 
