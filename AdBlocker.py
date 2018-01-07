@@ -4,8 +4,9 @@ import requests
 from config import Config
 import time
 import sys
-from AdBlockerFunctions import progressbar 
 from datetime import datetime
+# additional functions can be imported from external python script (i.e. AdBlockerFunctions.py)
+from AdBlockerFunctions import progressbar 
 
 # two sets to hold domains, one with domains already in Umbrella, the other with domains from Ads DB
 l_umbrella =[] 

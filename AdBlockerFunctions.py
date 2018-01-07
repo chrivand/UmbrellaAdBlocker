@@ -1,6 +1,8 @@
+# NOTE: more functions can be added below that can be imported in the main python script
+
 import sys
 
-# function for progress bar (source in readme file)
+# function for progress bar (source in README file)
 def progressbar(it, prefix = "", size = 60):
     count = len(it)
     def _show(_i):
@@ -14,3 +16,4 @@ def progressbar(it, prefix = "", size = 60):
         _show(i+1)
     sys.stdout.write("\n")
     sys.stdout.flush()
+
