@@ -49,7 +49,8 @@ for line in r.iter_lines():
         # they 9th character is the first of the domain, e.g.: 0.0.0.0 tracking.klickthru.com
 #        l_ads.append(line[8:])
 
-# creat two frozensets to hold domains 
+# create two frozensets to hold domains 
+# Frozensets are used for performance, and since we had to make sure both are in equal form this was chosen. 
 l_ads_js = frozenset(json.loads(json.dumps(l_ads)))
 l_umbrella_js = frozenset(json.loads(json.dumps(l_umbrella)))
 
@@ -77,7 +78,7 @@ Header = {'Content-type': 'application/json', 'Accept': 'application/json'}
 Url = cfg.eventurl+'?customerKey='+cfg.custkey
 
 # iterate variable used in comming for loop
-i = 1
+# i = 1 can be removed
 # time for AlertTime and EventTime when domains are added to Umbrella
 time = datetime.now().isoformat()
 
@@ -114,7 +115,7 @@ if dom_add:
             for i in progressbar(range(10),"failed to add: "+line,50):
                 time.sleep(1)
         pass 
-        i+= 1 
+# Can be removed        i+= 1 
 
 # give feedback to user and add line break for more overview
 sys.stdout.write("\n")  
