@@ -1,3 +1,2 @@
 AdBlocker.cfg
-AdBlockerFunctions.pyc
-AdBlocker.pyc
+*.pyc
