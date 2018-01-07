@@ -6,7 +6,7 @@ import time
 import sys
 from datetime import datetime
 # additional functions can be imported from external python script (i.e. AdBlockerFunctions.py)
-from AdBlockerFunctions import progressbar 
+from AdBlockerFunctions import progressbar, intervalScheduler
 
 # two sets to hold domains, one with domains already in Umbrella, the other with domains from Ads DB
 l_umbrella =[] 
@@ -123,14 +123,18 @@ def AdBlocker():
     sys.stdout.write("\n")  
     sys.stdout.write("Congratulations, the AdBlocker has been updated!\n")
 
-# call the AdBlocker function so that it gets executed in this file, comment out if using a scheduler for automatic refreshing
+# call the AdBlocker function so that it gets executed in this file, 
 try:
+    # comment out if using the intervalScheduler for automatic refreshing
     AdBlocker()
+    
+    # uncomment when using the intervalScheduler for automatic refreshing
+    #intervalScheduler(AdBlocker, 86400)
 except (KeyboardInterrupt, SystemExit):
     sys.stdout.write("\n")
     sys.stdout.write("Exiting...\n")
     sys.stdout.write("\n")
     sys.stdout.flush()
     pass
-    
+
 # end of script
