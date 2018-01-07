@@ -32,20 +32,22 @@ while True:
 Url = cfg.addurl
 r = requests.get(Url)
 
-# NOTE: this is the for-loop needed for the DevNet session (comment lines for full production version)
-# index is used to stop iteration after 250 domains
-for index, line in enumerate(r.iter_lines()):
-    if (index == 279):
-        break
-    elif (line[0:1] is '0'):
+# NOTE: this is the for-loop needed for the full production version (comment lines for DevNet session)
+for line in r.iter_lines():
+    # lines in Ads DB with domains, start with 0.0.0.0 ...
+    if (line[0:1] is '0'):
+        # they 9th character is the first of the domain, e.g.: 0.0.0.0 tracking.klickthru.com
         l_ads.append(line[8:])
 
-# NOTE: this is the for-loop needed for the full production version (comment lines for DevNet session)
-#for line in r.iter_lines():
+# NOTE: this is the for-loop needed for the DevNet session (comment lines for full production version)
+# index is used to stop iteration after 250 domains
+#for index, line in enumerate(r.iter_lines()):
+#    if (index == 279):
+#        break
     # lines in Ads DB with domains, start with 0.0.0.0 ...
-    #if (line[0:1] is '0'):
+#    elif (line[0:1] is '0'):
         # they 9th character is the first of the domain, e.g.: 0.0.0.0 tracking.klickthru.com
-        #l_ads.append(line[8:])
+#        l_ads.append(line[8:])
 
 # creat two frozensets to hold domains 
 l_ads_js = frozenset(json.loads(json.dumps(l_ads)))
@@ -87,7 +89,7 @@ if dom_add:
     sys.stdout.write("\n")
     # loop through domains that need to be added and create Event that can be sent with POST request (according to Umbrella API docummentation)
     for line in progressbar(dom_add,"Adding:   ",50):
-        # Although this information MUST be provided when using the API, not all of it is utilized in the destination lists within Umbrella
+        # NOTE: Although this information MUST be provided when using the API, not all of it is utilized in the destination lists within Umbrella
         data = {
         "alertTime": time + "Z",
         "deviceId": "ba6a59f4-e692-4724-ba36-c28132c761de",
