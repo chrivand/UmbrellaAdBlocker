@@ -1,3 +1,5 @@
+# NOTE: this script is for testing purposes to print the domains (GET requests only)
+
 import simplejson as json
 import requests
 from config import Config
