@@ -18,7 +18,7 @@ def progressbar(it, prefix = "", size = 60):
     sys.stdout.write("\n")
     sys.stdout.flush()
 
-# NOTE: This is an EXAMPLE function that can be used to schedule the Ad Blocker to refresh at intervals.
+# NOTE: This is an EXAMPLE function that can be used to schedule the Ad Blocker to refresh at intervals. Takes the AdBlocker function and the interval as parameters.
 def intervalScheduler(function, interval):
     # configure interval to refresh the AdBlocker (in seconds, 3600s = 1h, 86400s = 1d)
     setInterval = interval
