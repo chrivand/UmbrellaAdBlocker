@@ -80,7 +80,7 @@ def AdBlocker():
     Url = cfg.eventurl+'?customerKey='+cfg.custkey
 
     # iterate variable used in comming for loop 
-    i = 1 # (bartjanm-patch-1: DELETE?)
+    # i = 1 # (bartjanm-patch-1: DELETE)
     # time for AlertTime and EventTime when domains are added to Umbrella
     time = datetime.now().isoformat()
 
@@ -117,7 +117,7 @@ def AdBlocker():
                 for i in progressbar(range(10),"failed to add: "+line,50):
                     time.sleep(1)
             pass 
-            i+= 1 # (bartjanm-patch-1: DELETE?)
+            # i+= 1 # (bartjanm-patch-1: DELETE)
 
     # give feedback to user and add line break for more overview
     sys.stdout.write("\n")  
