@@ -132,6 +132,7 @@ try:
     #intervalScheduler(AdBlocker, 86400)
 except (KeyboardInterrupt, SystemExit):
     sys.stdout.write("\n")
+    sys.stdout.write("\n")
     sys.stdout.write("Exiting...\n")
     sys.stdout.write("\n")
     sys.stdout.flush()
