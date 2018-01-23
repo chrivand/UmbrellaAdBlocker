@@ -1,6 +1,6 @@
 # AdBlocker on Umbrella
 
-This is an Ad Blocker built on Cisco Umbrella. As a disclaimer we would like to point out that we do support advertisements on websites, since that is the payment model for everyone that creates the content we consume. This is merely a proof of value for the power of Cisco Umbrella’s custom integrations. This is not meant to be a commercial product or anything of that extend.
+This is an Ad Blocker built on Cisco Umbrella. As a disclaimer we would like to point out that we do support advertisements on websites, since that is the revenue model for everyone that creates the online content we consume. This is merely a proof of value for the power of Cisco Umbrella’s custom integrations. This is not meant to be a commercial product or anything of that extend.
 
 ## Getting Started with the Installation
 
