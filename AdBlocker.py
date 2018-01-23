@@ -42,14 +42,14 @@ def AdBlocker():
             # they 9th character is the first of the domain, e.g.: 0.0.0.0 tracking.klickthru.com
             l_ads.append(line[8:])
 
-    # NOTE: this is the for-loop needed for the DevNet session (comment lines for full production version)
-    # index is used to stop iteration after 250 domains
+    ## NOTE: this is the for-loop needed for the DevNet session (comment lines for full production version)
+    ## index is used to stop iteration after 250 domains
     #for index, line in enumerate(r.iter_lines()):
     #    if (index == 279):
     #        break
-        # lines in Ads DB with domains, start with 0.0.0.0 ...
+        ## lines in Ads DB with domains, start with 0.0.0.0 ...
     #    elif (line[0:1] is '0'):
-            # they 9th character is the first of the domain, e.g.: 0.0.0.0 tracking.klickthru.com
+            ## they 9th character is the first of the domain, e.g.: 0.0.0.0 tracking.klickthru.com
     #        l_ads.append(line[8:])
 
     # create two frozensets to hold domains: frozensets are used for performance, and since we had to make sure both are in equal form this was chosen.
