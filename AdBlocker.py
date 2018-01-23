@@ -16,10 +16,10 @@ l_ads  =[]
 f = file('AdBlocker.cfg')
 cfg = Config(f)
 
-#create function of entire Ad Blocker code, so that it can be called from other scripts
+# create function of entire Ad Blocker code, so that it can be called iteratively (e.g by the scheduler)
 def AdBlocker():
 
-    # append the set with all domains that are already present in the Umbrella integration by doing GET requests 
+    # GET REQUEST: append the set with all domains that are already present in the Umbrella integration by doing GET requests 
     Url = cfg.domainurl+'?customerKey='+cfg.custkey
     while True:
         r = requests.get(Url)
@@ -31,7 +31,7 @@ def AdBlocker():
         else:    
             break
 
-    # append the set for AdBlock domains from Ads DB by doing GET request
+    # GET REQUEST: append the set for AdBlock domains from Ads DB by doing GET request
     Url = cfg.addurl
     r = requests.get(Url)
 
@@ -66,7 +66,7 @@ def AdBlocker():
         sys.stdout.write("\n")
         sys.stdout.write("Unnecessary domains will be removed now:\n")
         sys.stdout.write("\n")
-        # deleting URL's that are in Umbrella, which are not in de Ads DB anymore 
+        # DELETE REQUEST: deleting URL's that are in Umbrella, which are not in de Ads DB anymore 
         for line in progressbar(dom_remove,"removing: ", 50):
             Url = cfg.domainurl+'?customerKey='+cfg.custkey+'&where[name]='+line
             r = requests.delete(Url) 
@@ -104,7 +104,7 @@ def AdBlocker():
             "providerName": "Security Platform"
             }
             
-            # post request ensembly
+            # POST REQUEST: post request ensembly
             req = requests.post(Url, data=json.dumps(data), headers={'Content-type': 'application/json', 'Accept': 'application/json'})
             
             # error handling 
