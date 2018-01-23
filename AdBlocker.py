@@ -1,4 +1,6 @@
-#import necessary libraries and functions
+# NOTE: this is the main script used for the ad blocker
+
+# import necessary libraries and functions
 import simplejson as json
 import requests
 from config import Config
