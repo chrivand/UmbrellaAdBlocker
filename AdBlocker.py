@@ -46,7 +46,7 @@ def AdBlocker():
 
     ## NOTE: this is the for-loop needed for the DevNet session (comment lines for full production version)
     ## iterate variable to break loop after 250 domains
-    #iBreak = 1
+    #iBreak = 0
     #for line in r.iter_lines():
     #    if (line[0:1] is '0'):
             ## they 9th character is the first of the domain, e.g.: 0.0.0.0 tracking.klickthru.com
