@@ -1,6 +1,6 @@
 # AdBlocker on Umbrella
 
-This is an Ad Blocker built on Cisco Umbrella. As a disclaimer we would like to point out that we do support advertisements on websites, since that is the revenue model for everyone that creates the online content we consume. This is merely a proof of concept for the power of Cisco Umbrella’s custom integrations. This is not meant to be a commercial product or anything of that extend.
+This is an Ad Blocker built on Cisco Umbrella. Please be aware that this script is a proof of concept to show how the Umbrella Enforcement API works. We do not intend to create a production version API integration or Ad Blocker. 
 
 ## Getting Started with the Installation
 
@@ -29,15 +29,19 @@ These instructions will get you a copy of the project up and running on your loc
 20. Edit the block page so that you know when the AdBlocker policy has been enforced.
 
 ### Github:
-1. Download zip file from Github
-2. Add key to AdBlocker.cfg
+1. Open a terminal window and run the following commands:
+```
+    $  mkdir AdBlocker
+    $  cd AdBlocker
+    $  git clone https://github.com/chrivand/UmbrellaAdBlocker.git
+```
 
 ### Terminal
 
 Some libraries are needed to be installed, in order for the code to work. Please use the below method to do so on your terminal:
 
 ```
-1. Change directory to folder “adblocker” (cd <path to folder>)
+1. If necessary, hange directory to folder “AdBlocker” (cd <path to folder>)
 2. Execute python file (python Adblocker.py)
 3. If necessary install necessary libraries:
 	$ sudo pip install --upgrade pip
