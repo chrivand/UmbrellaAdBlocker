@@ -3,7 +3,7 @@
 # import necessary libraries and functions
 import simplejson as json
 import requests
-from config import Config
+import yaml
 import time
 import sys
 from datetime import datetime
@@ -15,14 +15,18 @@ l_umbrella =[]
 l_ads  =[]
 
 # import file with API call URL's and customer key (file is in .gitignore)
-f = file('AdBlocker.cfg')
-cfg = Config(f)
+
+with open('AdBlocker.cfg', 'r') as stream:
+    try:
+        cfg = yaml.full_load(stream)
+    except yaml.YAMLError as exc:
+        print(exc)
 
 # create function of entire Ad Blocker code, so that it can be called iteratively (e.g by the scheduler)
 def AdBlocker():
 
     # GET REQUEST: append the set with all domains that are already present in the Umbrella integration by doing GET requests 
-    Url = cfg.domainurl+'?customerKey='+cfg.custkey
+    Url = cfg['domainurl'] +'?customerKey='+ cfg['custkey']
     while True:
         r = requests.get(Url)
         JsonFile = r.json()
@@ -34,11 +38,12 @@ def AdBlocker():
             break
 
     # GET REQUEST: append the set for AdBlock domains from Ads DB by doing GET request
-    Url = cfg.addurl
-    r = requests.get(Url)
+    Url = cfg['addurl']
+    print (Url)
+    r = requests.get(Url).text.splitlines()
 
     ## NOTE: this is the for-loop needed for the full production version (comment lines for DevNet session)
-    for line in r.iter_lines():
+    for line in r:
         ## lines in Ads DB with domains, start with 0.0.0.0 ...
         if (line[0:1] is '0'):
             ## they 9th character is the first of the domain, e.g.: 0.0.0.0 tracking.klickthru.com
@@ -72,7 +77,7 @@ def AdBlocker():
         sys.stdout.write("\n")
         # DELETE REQUEST: deleting URL's that are in Umbrella, which are not in de Ads DB anymore 
         for line in progressbar(dom_remove,"removing: ", 50):
-            Url = cfg.domainurl+'?customerKey='+cfg.custkey+'&where[name]='+line
+            Url = cfg['domainurl'] +'?customerKey='+ cfg['custkey'] +'&where[name]='+line
             r = requests.delete(Url) 
             print(line)
         # give feedback to user
@@ -81,7 +86,7 @@ def AdBlocker():
 
     # create header for post request to add new Ad Domains to Umbrella
     Header = {'Content-type': 'application/json', 'Accept': 'application/json'}
-    Url = cfg.eventurl+'?customerKey='+cfg.custkey
+    Url = cfg['eventurl'] +'?customerKey='+ cfg['custkey']
 
     # time for AlertTime and EventTime when domains are added to Umbrella
     time = datetime.now().isoformat()
