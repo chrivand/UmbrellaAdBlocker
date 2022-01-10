@@ -4,7 +4,7 @@ This is an Ad Blocker built on Cisco Umbrella. Please be aware that this script 
 
 ## Getting Started with the Installation
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Please follow the below steps. There is an extensive lab guide written for DevNet learling labs. Please send a message for more information, or check out the [Cisco DevNet](https://developer.cisco.com) website.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. Please follow the below steps. There is an extensive lab guide written for DevNet learning labs. Please send a message for more information, or check out the [Cisco DevNet](https://developer.cisco.com) website.
 
 ### Umbrella Dashboard:
 1. Policies
@@ -42,7 +42,7 @@ These instructions will get you a copy of the project up and running on your loc
 Some libraries are needed to be installed, in order for the code to work. Please use the below method to do so on your terminal:
 
 ```
-1. If necessary, hange directory to folder “AdBlocker” (cd <path to folder>)
+1. If necessary, change directory to folder “AdBlocker” (cd <path to folder>)
 2. Execute python file (python Adblocker.py)
 3. If necessary install necessary libraries:
 	$ sudo pip install --upgrade pip
